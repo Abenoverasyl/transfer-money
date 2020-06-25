@@ -17,8 +17,8 @@ public class SwaggerConfig {
     public Docket productApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.transfermoney"))
-                .paths(regex("/rest.*"))
+                .apis(RequestHandlerSelectors.basePackage("com.app.transfermoney"))
+                .paths(regex("/.*"))
                 .build();
     }
 }

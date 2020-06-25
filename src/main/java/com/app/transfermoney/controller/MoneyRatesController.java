@@ -14,14 +14,17 @@ import java.util.List;
 @RequestMapping("/money")
 public class MoneyRatesController {
 
-    @Autowired
-    private RestTemplate restTemplate;
+//    @Autowired
+//    private RestTemplate restTemplate;
 
     @GetMapping("/rates")
     public String getRates() {
-        String url = "http://data.fixer.io/api/latest?access_key=61060a053f4283ca9f97d87df091dd0a";
-        String res = restTemplate.getForObject(url, Object[].class).toString();
+        String url = "http://data.fixer.io/api/latest?access_key=61060a053f4283ca9f97d87df091dd0a&format=1";
+//        String res = restTemplate.getForObject(url, String.class);
 
-        return res;
+        RestTemplate restTemplate = new RestTemplate();
+        String result = restTemplate.getForObject(url, String.class);
+
+        return result;
     }
 }
