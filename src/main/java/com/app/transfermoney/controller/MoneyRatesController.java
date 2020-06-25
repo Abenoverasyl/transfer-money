@@ -1,6 +1,10 @@
 package com.app.transfermoney.controller;
 
+import com.app.transfermoney.model.Rates;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,12 +19,18 @@ import java.util.List;
 public class MoneyRatesController {
 
     @GetMapping("/rates")
-    public String getRates() {
-        String uri = "http://data.fixer.io/api/latest?access_key=61060a053f4283ca9f97d87df091dd0a&format=1";
+    public Rates getRates() {
+        String url = "http://data.fixer.io/api/latest?access_key=61060a053f4283ca9f97d87df091dd0a&format=1";
 
         RestTemplate restTemplate = new RestTemplate();
-        String result = restTemplate.getForObject(uri, String.class);
+        Rates rates = restTemplate.getForObject(url, Rates.class);
 
-        return result;
+//        ResponseEntity<Rates> rateResponse =
+//                restTemplate.exchange(url,
+//                        HttpMethod.GET, null, new ParameterizedTypeReference<Rates>() {
+//                        });
+
+//        Rates rates = rateResponse.getBody();
+        return rates;
     }
 }
